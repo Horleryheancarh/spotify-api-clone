@@ -8,7 +8,14 @@ GET http://localhost:3000/songs/1
 
 ### Create New Song
 POST http://localhost:3000/songs
+Content-Type: application/json
 
+{
+  "title": "Four Five Seconds",
+  "artists": ["Rihanna", "Kanye West", "Paul McCartney"],
+  "releaseDate": "2015-01-24",
+  "duration": "03:08"
+}
 
 ### Update Song
 PUT http://localhost:3000/songs/1
