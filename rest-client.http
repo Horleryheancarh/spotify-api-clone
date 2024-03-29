@@ -1,3 +1,7 @@
+###
+GET http://localhost:3000
+
+
 ### Fetch All Songs
 GET http://localhost:3000/songs
 
