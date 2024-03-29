@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class SongsService {
@@ -15,6 +15,9 @@ export class SongsService {
 
   findAll() {
     // Fetch songs from db
+    if (this.songs.length <= 0) {
+      throw new NotFoundException('No Songs Available');
+    }
     return this.songs;
   }
 }
