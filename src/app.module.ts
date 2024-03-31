@@ -11,11 +11,9 @@ import { Song } from './api/songs/song.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      database: 'spotify-clone',
-      host: 'localhost',
-      port: 27017,
-      username: '',
-      password: '',
+      url: 'mongodb://localhost:27017/spotify-clone',
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       entities: [Song],
       synchronize: true,
     }),

@@ -3,38 +3,37 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dtos/create-song-dto';
+import { Song } from './song.entity';
 
 @Controller('songs')
 export class SongsController {
   constructor(private songsService: SongsService) {}
 
   @Post()
-  createSong(@Body() createSongDto: CreateSongDTO) {
-    return this.songsService.create(createSongDto);
+  async createSong(@Body() createSongDto: CreateSongDTO): Promise<Song> {
+    return await this.songsService.create(createSongDto);
   }
 
   @Get()
-  getSongs() {
-    return this.songsService.findAll();
+  async getSongs(): Promise<Song[]> {
+    const songs = await this.songsService.findAll();
+
+    for (const song of songs) {
+      console.log(`${typeof song.id}`);
+    }
+
+    return songs;
   }
 
   @Get(':id')
-  getSong(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ): string {
-    return `Find song based on the id ${typeof id}`;
+  async getSong(@Param('id') id: string): Promise<Song> {
+    return await this.songsService.findOne(id);
   }
 
   @Put(':id')
