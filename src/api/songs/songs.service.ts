@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Song } from './song.entity';
-import { Repository } from 'typeorm';
 import { CreateSongDTO } from './dtos/create-song-dto';
+import { UpdateSongDTO } from './dtos/update-song-dto';
 
 @Injectable()
 export class SongsService {
@@ -32,5 +33,21 @@ export class SongsService {
     if (!song) throw new NotFoundException('Song not Found');
 
     return song;
+  }
+
+  async update(id: string, data: UpdateSongDTO): Promise<UpdateResult> {
+    const song = await this.songRepository.findOneBy({ id });
+
+    if (!song) throw new NotFoundException('Song not Found');
+
+    return await this.songRepository.update(id, { ...data });
+  }
+
+  async remove(id: string): Promise<DeleteResult> {
+    const song = await this.songRepository.findOneBy({ id });
+
+    if (!song) throw new NotFoundException('Song not Found');
+
+    return await this.songRepository.delete(id);
   }
 }

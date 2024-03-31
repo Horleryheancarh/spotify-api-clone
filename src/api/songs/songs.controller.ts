@@ -10,6 +10,8 @@ import {
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dtos/create-song-dto';
 import { Song } from './song.entity';
+import { DeleteResult, UpdateResult } from 'typeorm';
+import { UpdateSongDTO } from './dtos/update-song-dto';
 
 @Controller('songs')
 export class SongsController {
@@ -22,13 +24,7 @@ export class SongsController {
 
   @Get()
   async getSongs(): Promise<Song[]> {
-    const songs = await this.songsService.findAll();
-
-    for (const song of songs) {
-      console.log(`${typeof song.id}`);
-    }
-
-    return songs;
+    return await this.songsService.findAll();
   }
 
   @Get(':id')
@@ -37,12 +33,15 @@ export class SongsController {
   }
 
   @Put(':id')
-  updateSong(): string {
-    return 'Update song based on the id';
+  async updateSong(
+    @Param('id') id: string,
+    @Body() updateSongDto: UpdateSongDTO,
+  ): Promise<UpdateResult> {
+    return await this.songsService.update(id, updateSongDto);
   }
 
   @Delete(':id')
-  deleteSong(): string {
-    return 'Delete song based on the id';
+  async deleteSong(@Param('id') id: string): Promise<DeleteResult> {
+    return await this.songsService.remove(id);
   }
 }
