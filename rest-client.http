@@ -7,7 +7,7 @@ GET http://localhost:3000/songs
 
 
 ### Fetch Single Song
-GET http://localhost:3000/songs/660933a3fcc5c44a6b934174
+GET http://localhost:3000/songs/3
 
 
 ### Create New Song
@@ -17,15 +17,23 @@ Content-Type: application/json
 {
   "title": "Four Five Seconds",
   "artists": ["Rihanna", "Kanye West", "Paul McCartney"],
-  "releaseDate": "2015-01-24",
+  "releasedDate": "2015-01-24",
   "duration": "03:08"
 }
 
 ### Update Song
-PUT http://localhost:3000/songs/1
+PUT http://localhost:3000/songs/2
+Content-Type: application/json
+
+{
+  "title": "Four Five Seconds remix",
+  "artists": ["Rihanna", "Kanye West", "Paul McCartney"],
+  "releasedDate": "2015-06-30",
+  "duration": "04:08"
+}
 
 
 ### Delete single Song
-DELETE http://localhost:3000/songs/1
+DELETE http://localhost:3000/songs/4
 
 

@@ -17,7 +17,7 @@ export class UpdateSongDTO {
 
   @IsDateString()
   @IsOptional()
-  readonly releaseDate: Date;
+  readonly releasedDate: Date;
 
   @IsMilitaryTime()
   @IsOptional()
