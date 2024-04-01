@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './api/songs/song.entity';
 import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config';
+import { Artist } from './api/artists/artist.entity';
+import { User } from './api/users/user.entity';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config';
       port: DB_PORT,
       username: DB_USERNAME,
       password: DB_PASSWORD,
-      entities: [Song],
+      entities: [Song, Artist, User],
       synchronize: true,
     }),
     SongsModule,
