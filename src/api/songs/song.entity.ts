@@ -3,9 +3,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Artist } from '../artists/artist.entity';
+import { Playlist } from '../playlists/playlist.entity';
 
 @Entity('songs')
 export class Song {
@@ -28,9 +30,6 @@ export class Song {
   @JoinTable({ name: 'songs_artists' })
   artists: Artist[];
 
-  // /**
-  //  * Many songs can belong to a playlist
-  //  */
-  // @ManyToOne(() => Playlist, (playList) => playList.songs)
-  // playList: Playlist;
+  @ManyToOne(() => Playlist, (playList) => playList.songs)
+  playList: Playlist;
 }

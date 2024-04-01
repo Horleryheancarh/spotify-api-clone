@@ -9,6 +9,7 @@ import { Song } from './api/songs/song.entity';
 import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config';
 import { Artist } from './api/artists/artist.entity';
 import { User } from './api/users/user.entity';
+import { Playlist } from './api/playlists/playlist.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { User } from './api/users/user.entity';
       port: DB_PORT,
       username: DB_USERNAME,
       password: DB_PASSWORD,
-      entities: [Song, Artist, User],
+      entities: [Song, Artist, User, Playlist],
       synchronize: true,
     }),
     SongsModule,
@@ -31,13 +32,6 @@ export class AppModule implements NestModule {
     console.log('db', this.datasource.driver.database);
   }
   configure(consumer: MiddlewareConsumer) {
-    // Option 1
     consumer.apply(LoggerMiddleware).forRoutes('songs');
-    // Option 2
-    // consumer
-    //   .apply(LoggerMiddleware)
-    //   .forRoutes({ path: 'songs', method: RequestMethod.POST });
-    // Option 3
-    // consumer.apply(LoggerMiddleware).forRoutes(SongsController);
   }
 }
