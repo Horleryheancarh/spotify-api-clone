@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -11,7 +12,6 @@ import { SongsService } from './songs.service';
 import { CreateSongDTO } from './dtos/create-song-dto';
 import { Song } from './song.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { ObjectId } from 'mongodb';
 import { UpdateSongDTO } from './dtos/update-song-dto';
 
 @Controller('songs')
@@ -29,20 +29,22 @@ export class SongsController {
   }
 
   @Get(':id')
-  async getSong(@Param('id') id: string): Promise<Song> {
-    return await this.songsService.findOne(new ObjectId(id));
+  async getSong(@Param('id', ParseIntPipe) id: number): Promise<Song> {
+    return await this.songsService.findOne(id);
   }
 
   @Put(':id')
   async updateSong(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateSongDto: UpdateSongDTO,
   ): Promise<UpdateResult> {
-    return await this.songsService.update(new ObjectId(id), updateSongDto);
+    return await this.songsService.update(id, updateSongDto);
   }
 
   @Delete(':id')
-  async deleteSong(@Param('id') id: string): Promise<DeleteResult> {
-    return await this.songsService.remove(new ObjectId(id));
+  async deleteSong(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<DeleteResult> {
+    return await this.songsService.remove(id);
   }
 }

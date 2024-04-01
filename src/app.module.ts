@@ -6,14 +6,16 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './api/songs/song.entity';
+import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from './config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: 'mongodb://localhost:27017/spotify-clone',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      type: 'postgres',
+      host: DB_HOST,
+      port: DB_PORT,
+      username: DB_USERNAME,
+      password: DB_PASSWORD,
       entities: [Song],
       synchronize: true,
     }),
