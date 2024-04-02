@@ -57,3 +57,7 @@ Content-Type: application/json
   "email": "johndoe@gmail.com",
   "password": "1234567890"
 }
+
+### Get Profile
+GET http://localhost:3000/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTcxMjAxNzIzMSwiZXhwIjoxNzEyNjIyMDMxfQ.zG4rI3DkMTwmV5xi_fCKKfwYr58S_-iEyW61beBMBH8
