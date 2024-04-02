@@ -12,6 +12,7 @@ GET http://localhost:3000/songs/3
 
 ### Create New Song
 POST http://localhost:3000/songs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTcxMjAxNzIzMSwiZXhwIjoxNzEyNjIyMDMxfQ.zG4rI3DkMTwmV5xi_fCKKfwYr58S_-iEyW61beBMBH8
 Content-Type: application/json
 
 {
@@ -26,8 +27,8 @@ PUT http://localhost:3000/songs/2
 Content-Type: application/json
 
 {
-  "title": "Four Five Seconds remix",
-  "artists": ["Rihanna", "Kanye West", "Paul McCartney"],
+  "title": "Calm Down",
+  "artists": ["Rihanna"],
   "releasedDate": "2015-06-30",
   "duration": "04:08"
 }
@@ -42,9 +43,9 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "firstName": "John",
+  "firstName": "Jane",
   "lastName": "Doe",
-  "email": "johndoe@gmail.com",
+  "email": "janedoe@gmail.com",
   "password": "1234567890"
 }
 
