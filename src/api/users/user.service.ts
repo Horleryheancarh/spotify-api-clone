@@ -29,4 +29,19 @@ export class UsersService {
 
     return user;
   }
+
+  async findById(id: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) throw new UnauthorizedException('User not found');
+
+    return user;
+  }
+
+  async updateSecretKey(id: number, secret: string) {
+    return await this.userRepository.update(
+      { id },
+      { twoFASecret: secret, enable2FA: true },
+    );
+  }
 }
