@@ -78,8 +78,10 @@ export class AuthService {
       encoding: 'base32',
     });
 
-    if (verified) return { verified };
-
     return { verified };
+  }
+
+  async validateUserByApiKey(apiKey: string) {
+    return this.userService.findByApiKey(apiKey);
   }
 }

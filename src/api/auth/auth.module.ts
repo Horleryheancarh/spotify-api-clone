@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JWT_SECRET } from 'src/config';
 import { JwtStrategy } from './jwt.strategy';
 import { ArtistModule } from '../artists/artist.module';
+import { ApiKeyStrategy } from './ApiKeyStrategy';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { ArtistModule } from '../artists/artist.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, ApiKeyStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
