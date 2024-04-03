@@ -62,3 +62,18 @@ Content-Type: application/json
 ### Get Profile
 GET http://localhost:3000/user/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTcxMjAxNzIzMSwiZXhwIjoxNzEyNjIyMDMxfQ.zG4rI3DkMTwmV5xi_fCKKfwYr58S_-iEyW61beBMBH8
+
+
+### Enable 2FA
+GET http://localhost:3000/auth/enable-2fa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTcxMjAxNzIzMSwiZXhwIjoxNzEyNjIyMDMxfQ.zG4rI3DkMTwmV5xi_fCKKfwYr58S_-iEyW61beBMBH8
+
+
+### Validate 2FA
+POST http://localhost:3000/auth/validate-2fa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTcxMjAxNzIzMSwiZXhwIjoxNzEyNjIyMDMxfQ.zG4rI3DkMTwmV5xi_fCKKfwYr58S_-iEyW61beBMBH8
+Content-Type: application/json
+
+{
+  "token": "628390"
+}

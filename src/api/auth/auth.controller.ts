@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards, Req } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards, Req, Get } from '@nestjs/common';
 import { UsersService } from '../users/user.service';
 import { User } from '../users/user.entity';
 import { CreateUserDTO } from '../users/dtos/create-user-dto';
@@ -6,6 +6,7 @@ import { LoginDTO } from './dtos/login-dto';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt.guard';
 import { Enable2FAType } from 'src/types/enable2fa.type';
+import { ValidateTokenDTO } from './dtos/validate-token-dto';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +25,7 @@ export class AuthController {
     return await this.authService.login(loginDto);
   }
 
-  @Post('enable-2fa')
+  @Get('enable-2fa')
   @UseGuards(JwtAuthGuard)
   async enable2FA(@Req() req): Promise<Enable2FAType> {
     return await this.authService.enable2FA(req.user.userId);
@@ -34,4 +35,15 @@ export class AuthController {
   async disable2fa() {}
 
   // Validate 2fa
+  @Post('validate-2fa')
+  @UseGuards(JwtAuthGuard)
+  async validate2FA(
+    @Req() req,
+    @Body() validateTokenDto: ValidateTokenDTO,
+  ): Promise<{ verified: boolean }> {
+    return await this.authService.validate2FAToken(
+      req.user.userId,
+      validateTokenDto.token,
+    );
+  }
 }
