@@ -17,7 +17,11 @@ export class AuthService {
     private artistService: ArtistService,
   ) {}
 
-  async login(loginDto: LoginDTO): Promise<{ access_token: string }> {
+  async login(
+    loginDto: LoginDTO,
+  ): Promise<
+    { access_token: string } | { validate2FA: string; message: string }
+  > {
     const user = await this.userService.findOne(loginDto.email);
     const passwordMatch = await bcrypt.compare(
       loginDto.password,
@@ -32,6 +36,12 @@ export class AuthService {
 
     const artist = await this.artistService.findArtistByUserId(user.id);
     if (artist) payload.artistId = artist.id;
+
+    if (user.enable2FA)
+      return {
+        validate2FA: '/auth/validate-2fa',
+        message: 'Validate your OTP from authenitcaor app',
+      };
 
     return {
       access_token: this.jwtService.sign(payload),

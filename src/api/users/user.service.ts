@@ -46,6 +46,9 @@ export class UsersService {
   }
 
   async disable2FA(id: number): Promise<UpdateResult> {
-    return await this.userRepository.update({ id }, { twoFASecret: '', enable2FA: false });
+    return await this.userRepository.update(
+      { id },
+      { twoFASecret: null, enable2FA: false },
+    );
   }
 }
