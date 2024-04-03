@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt.guard';
 import { Enable2FAType } from 'src/types/enable2fa.type';
 import { ValidateTokenDTO } from './dtos/validate-token-dto';
+import { UpdateResult } from 'typeorm';
 
 @Controller('auth')
 export class AuthController {
@@ -31,8 +32,11 @@ export class AuthController {
     return await this.authService.enable2FA(req.user.userId);
   }
 
-  @Post('disable-2fa')
-  async disable2fa() {}
+  @Get('disable-2fa')
+  @UseGuards(JwtAuthGuard)
+  async disable2fa(@Req() req): Promise<UpdateResult> {
+    return await this.authService.disable2FA(req.user.userId);
+  }
 
   // Validate 2fa
   @Post('validate-2fa')
