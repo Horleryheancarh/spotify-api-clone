@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JWT_SECRET } from 'src/config';
 import { JwtStrategy } from './jwt.strategy';
 import { ArtistModule } from '../artists/artist.module';
-import { ApiKeyStrategy } from './ApiKeyStrategy';
+import { ApiKeyStrategy } from './apikey.strategy';
 
 @Module({
   imports: [
