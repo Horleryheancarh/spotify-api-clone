@@ -10,6 +10,7 @@ import { UserModule } from './api/users/user.module';
 import { AuthModule } from './api/auth/auth.module';
 import { ArtistModule } from './api/artists/artist.module';
 import { dataSourceOptions } from './db/data-source';
+import { SeedModule } from './api/seed/seed.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { dataSourceOptions } from './db/data-source';
     UserModule,
     AuthModule,
     ArtistModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
