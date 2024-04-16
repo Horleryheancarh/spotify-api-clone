@@ -14,6 +14,7 @@ import { ArtistModule } from './api/artists/artist.module';
 import { typeOrmAsyncConfig } from './db/data-source';
 import { SeedModule } from './api/seed/seed.module';
 import config from './config';
+import { validate } from './env.validation';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import config from './config';
       envFilePath: ['.env.dev', '.env.prod'],
       isGlobal: true,
       load: [config],
+      validate: validate,
     }),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     PlayListModule,
