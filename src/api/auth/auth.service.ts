@@ -1,13 +1,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { UpdateResult } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as speakeasy from 'speakeasy';
+
 import { UsersService } from '../users/user.service';
 import { LoginDTO } from './dtos/login-dto';
-import { JwtService } from '@nestjs/jwt';
 import { ArtistService } from '../artists/artist.service';
 import { PayloadType } from 'src/types/payload.type';
 import { Enable2FAType } from 'src/types/enable2fa.type';
-import { UpdateResult } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +17,7 @@ export class AuthService {
     private userService: UsersService,
     private jwtService: JwtService,
     private artistService: ArtistService,
+    private configService: ConfigService,
   ) {}
 
   async login(
@@ -83,5 +86,9 @@ export class AuthService {
 
   async validateUserByApiKey(apiKey: string) {
     return this.userService.findByApiKey(apiKey);
+  }
+
+  getEnvVariable() {
+    return this.configService.get<number>('PORT');
   }
 }

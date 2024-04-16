@@ -1,6 +1,6 @@
 import { EntityManager } from 'typeorm';
 import { faker } from '@faker-js/faker';
-import { va as uuid4 } from 'uuid';
+import { v4 as uuid4 } from 'uuid';
 import * as bcrypt from 'bcryptjs';
 
 import { User } from 'src/api/users/user.entity';
