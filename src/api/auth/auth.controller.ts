@@ -9,7 +9,9 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt.guard';
 import { Enable2FAType } from 'src/types/enable2fa.type';
 import { ValidateTokenDTO } from './dtos/validate-token-dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -17,6 +19,11 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
+  @ApiOperation({ summary: 'Register New User' })
+  @ApiResponse({
+    status: 201,
+    description: 'Returns User',
+  })
   @Post('signup')
   async signup(@Body() userDto: CreateUserDTO): Promise<User> {
     return await this.userService.create(userDto);
